@@ -16,10 +16,13 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Shop</a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="#!">All Products</a></li>
+                        <li><a class="dropdown-item" href="{% url 'home' %}">All Products</a></li>
                         <li><hr class="dropdown-divider" /></li>
-                        <li><a class="dropdown-item" href="#!">Popular Items</a></li>
-                        <li><a class="dropdown-item" href="#!">New Arrivals</a></li>
+<!--                        {% for c in categories %}-->
+<!--                        <li><a class="dropdown-item" href="{% url 'category' c.name %}">{{c.name}}</a></li>-->
+<!--                        {% endfor %}-->
+                        <li><a class="dropdown-item" href="{% url 'category' 'Anime' %}">Anime</a></li>
+                        <li><a class="dropdown-item" href="{% url 'category' 'Art' %}">Art</a></li>
                     </ul>
                 </li>
             </ul>

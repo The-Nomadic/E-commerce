@@ -1,11 +1,25 @@
 from django.shortcuts import render, redirect
-from .models import Product
+from .models import Product, Category
 from datetime import datetime
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from .forms import SignUpForm
 
 current_year = datetime.now().year
+
+
+def category(request, cat):
+    cat = cat.replace('-', ' ')
+    try:
+        categories = Category.objects.all()
+        category = Category.objects.get(name=cat)
+        products = Product.objects.filter(category=category)
+        return render(request, "category.html", {'company': "New Gens", 'current_year': current_year,
+                                                 'products': products, 'category': category,
+                                                 'categories': categories})
+    except:
+        messages.success(request, f"{cat} doesn't exist")
+        return redirect('home')
 
 
 # Create your views here.
@@ -58,3 +72,8 @@ def register_user(request):
             return redirect('register')
     else:
         return render(request, "register.html", {'company': "New Gens", 'current_year': current_year, 'form': form})
+
+
+def product(request, pk):
+    product = Product.objects.get(id=pk)
+    return render(request, "product.html", {'company': "New Gens", 'current_year': current_year, 'product': product})
